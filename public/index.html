@@ -4,16 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Final Year project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/jquery.Jcrop.min.css"/>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
 </head>
 <body>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" id="image" accept="image/*">
-        <button type="submit">Upload Image</button>
-    </form>
-    <div class="output">
-        <img src="loading.gif" id="loader" style="display: none;" alt="">
+    <div class="container">
+            <div class="jumbotron">
+
+
+                    <div id="step1">
+                            <h1><i class="glyphicon glyphicon-picture"></i></h1>
+                
+                            <p class="lead">
+                                Upload a clear and well captured picture containing texts.
+                                
+                            </p>
+                            <figure class="not-ready">
+                                    <video autoplay></video>
+                                </figure>
+                                
+                            <button class="btn btn-lg btn-success" disabled id="takePicture">Upload Image</button>
+                        </div>
+
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="file" name="image" id="image" accept="image/*">
+                        <button type="submit">Upload Image</button>
+                    </form>
+                
+                    
+                
+                    <div class="output">
+                        <img src="loading.gif" id="loader" style="display: none;" alt="">
+                    </div>
+
+            </div>
+            
     </div>
+   
+
+
+
+
+
 
     <script
   src="https://code.jquery.com/jquery-3.3.1.js"
