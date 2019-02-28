@@ -26,17 +26,23 @@
                                 Upload a clear and well captured picture containing texts.
                                 
                             </p>
-                            <figure class="not-ready">
-                                    <video autoplay></video>
-                                </figure>
-                                
-                            <button class="btn btn-lg btn-success" disabled id="takePicture">Upload Image</button>
+                            <button class="btn btn-lg btn-success" id="uploadpicture">Upload Image</button>
+                            <div class="image-section">
+                                <svg class="placeholder" width="300px" height="200px"></svg>
+                                <img src="" id="preview" style="display: none"/>
+                            </div>
+                            </div>
+
+                           
+                            <form action="/upload" method="post" enctype="multipart/form-data">
+                                <input type="file" style="display: none" name= "image" id="image" accept="image/*"  onchange="previewFile()"/>
+                                <button class="btn btn-lg btn-success" type="submit">Convert Image</button>
+                            </form>
+
+                            
                         </div>
 
-                    <form action="/upload" method="post" enctype="multipart/form-data">
-                        <input type="file" name="image" id="image" accept="image/*">
-                        <button type="submit">Upload Image</button>
-                    </form>
+                   
                 
                     
                 
@@ -59,6 +65,32 @@
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
     <script>
+
+        $("#uploadpicture").click(function(e){
+            e.preventDefault();
+            $("#image").trigger("click");
+        })
+    
+
+        function previewFile(){
+            $(".placeholder").addClass("hide");
+            $("#preview").show();
+       var preview = document.querySelector('#preview'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+           //$("#uploadpicture").attr("disabled",true)
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+       
+  }
         $('form').submit(function(e) {
             e.preventDefault();
             var form = $('form')[0];
