@@ -20,7 +20,7 @@
 
 
                     <div id="step1">
-                            <h1><i class="glyphicon glyphicon-picture"></i></h1>
+                            <!-- <h1><i class="glyphicon glyphicon-picture"></i></h1> -->
                 
                             <p class="lead">
                                 Upload a clear and well captured picture containing texts.
@@ -31,8 +31,12 @@
                                 <svg class="placeholder" width="300px" height="200px"></svg>
                                 <img src="" id="preview" style="display: none"/>
                             </div>
-                            </div>
 
+
+                            </div>
+                            <p>Brightness: <input type="range" min="0" max="100" id="brightness" value="50"></p>
+
+                            <p>Contrast: <input type="range" min="0" max="100" id="contrast" value="50"></p>
                            
                             <form action="/upload" method="post" enctype="multipart/form-data">
                                 <input type="file" style="display: none" name= "image" id="image" accept="image/*"  onchange="previewFile()"/>
@@ -70,7 +74,21 @@
             e.preventDefault();
             $("#image").trigger("click");
         })
-    
+        
+        $("#brightness").click(function(e){
+            e.preventDefault();
+            var bright = $('#brightness').val() * 2;
+            $("#preview").css("filter","brightness("+ bright + "%)");
+
+        })
+        
+        $("#contrast").click(function(e){
+            e.preventDefault();
+            var contra = $('#contrast').val() * 2;
+            $("#preview").css("filter","brightness("+ contra + "%)");
+
+        })
+
 
         function previewFile(){
             $(".placeholder").addClass("hide");
@@ -89,6 +107,7 @@
        } else {
            preview.src = "";
        }
+       $('html,body').animate({scrollTop: document.body.scrollHeight},"slow");
        
   }
         $('form').submit(function(e) {
