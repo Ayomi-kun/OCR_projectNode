@@ -60,7 +60,8 @@ app.use(function(err, req, res, next) {
     console.log(err);
     res.render('error',{error:err});
   });
-
+const PORT = process.env.PORT || 8000;
   app.listen(8000,() => {
-      console.log('server running')
+      console.log(`server running on http://localhost:${PORT}`);
+      
   })
