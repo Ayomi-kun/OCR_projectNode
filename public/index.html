@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="/css/main.css"/>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/fineCrop.css" rel="stylesheet" />
+    <link href="/css/layout.css" rel="stylesheet" />
+
 
 </head>
 <body>
@@ -22,10 +26,10 @@
                     <div id="step1">
                             <!-- <h1><i class="glyphicon glyphicon-picture"></i></h1> -->
                 
-                            <p class="lead">
+                            <h3 class="lead">
                                 Upload a clear and well captured picture containing texts.
                                 
-                            </p>
+                            </h3>
                             <button class="btn btn-lg btn-success" id="uploadpicture">Upload Image</button>
                             <div class="image-section">
                                 <svg class="placeholder" width="300px" height="200px"></svg>
@@ -44,38 +48,40 @@
                                 <button class="btn btn-lg btn-success" type="submit">Convert Image</button>
                             </form>
 
-                            
+                    <div class="output">
+                        <img src="loading.gif" id="loader" style="display: none;" alt="">
+                    </div>
                         </div>
 
                    
                 
                     
                 
-                    <div class="output">
-                        <img src="loading.gif" id="loader" style="display: none;" alt="">
-                    </div>
 
                     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary"  style="display: none" id="result-output" data-toggle="modal" data-target="#exampleModal">
         Launch demo modal
       </button>
       
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="overflow-y: auto; max-height: 300px">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Recognized Text</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              ...
+                <p id="modal-body1">
+                    
+                </p>
+               
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button onclick="copyToClipboard('#modal-body1')" type="button" class="btn btn-primary">Copy to Clipboard</button>
             </div>
           </div>
         </div>
@@ -86,16 +92,56 @@
     </div>
    
 
+    <div class="cropHolder">
+        <div id="cropWrapper">
+            <img id="inputImage" src="/images/face.jpg">
+        </div>
+        <div class="cropInputs">
+            <div class="inputtools">
+                <p>
+                    <span>
+                        <img src="/images/horizontal.png">
+                    </span>
+                    <span>horizontal movement</span>
+                </p>
+                <input type="range" class="cropRange" name="xmove" id="xmove" min="0" value="0">
+            </div>
+            <div class="inputtools">
+                <p>
+                    <span>
+                        <img src="/images/vertical.png">
+                    </span>
+                    <span>vertical movement</span>
+                </p>
+                <input type="range" class="cropRange" name="ymove" id="ymove" min="0" value="0">
+            </div>
+            <br>
+            <button class="cropButtons" id="zplus">
+                <img src="/images/add.png">
+            </button>
+            <button class="cropButtons" id="zminus">
+                <img src="/images/minus.png">
+            </button>
+            <br>
+            <button id="cropSubmit">submit</button>
+            <button id="closeCrop">Close</button>
+        </div>
+    </div>
 
 
 
 
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
-    <script src="/js/vendor/bootstrap.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+  <script src="/js/fineCrop.js"></script>
+  <!-- <script src="/js/image-to-base64.min.js"></script> -->
+  <!-- <script src="/node_modules/image-to-base64/image-to-base64.min.js"></script> -->
+  
     <script>
         $("#uploadpicture").click(function(e){
             e.preventDefault();
@@ -106,7 +152,6 @@
             e.preventDefault();
             var bright = $('#brightness').val() * 2;
             $("#preview").css("filter","brightness("+ bright + "%)");
-
         })
         
         $("#contrast").click(function(e){
@@ -115,6 +160,15 @@
             $("#preview").css("filter","brightness("+ contra + "%)");
 
         })
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+}
+
+
 
 
         function previewFile(){
@@ -143,6 +197,18 @@
         $('form').submit(function(e) {
             e.preventDefault();
             var form = $('form')[0];
+            const src = $('#preview').attr('src');
+            // image2base64(`${src}`)
+            // .then(
+            //     (response) => {
+            //         console.log(response); //iVBORw0KGgoAAAANSwCAIA...
+            //     }
+            // )
+            // .catch(
+            //     (error) => {
+            //         console.log(error); //Exepection error....
+            //     }
+            // )
 	        var data = new FormData(form);
             $.ajax({
                 url: '/upload',
@@ -158,8 +224,10 @@
                 success: function(data) {
                     console.log(data)
                     $('#loader').hide();
-                    $('#output-result').trigger("click");
-                    $('modal-body').text(data);
+                    $('#result-output').trigger("click");
+                    $('#modal-body1').text(data);
+                    $('#trial2').text(data);
+                    
                 }, 
                 error: function(xhr){
                     console.log(xhr)
@@ -167,5 +235,30 @@
             })
         })
     </script>
+    <script>
+        $("#image").finecrop({
+            viewHeight: 500,
+            cropWidth: 500,
+            cropHeight: 500,
+            cropInput: 'inputImage',
+            cropOutput: 'preview',
+            zoomValue: 50
+        });
+    </script>
+</body>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </body>
 </html>
